@@ -25,7 +25,7 @@ function timestamp() {
 //
 // Usage:
 //   GET /api/restore?externalId=STU123456
-//   GET /api/restore?externalId=STU123456&platform=siteA
+//   GET /api/restore?externalId=STU123456
 // =============================================================================
 app.get('/api/restore', (req, res) => {
   const { externalId, platform } = req.query;
@@ -34,7 +34,7 @@ app.get('/api/restore', (req, res) => {
     return res.status(400).json({
       success: false,
       error: 'externalId is required as a query parameter.',
-      example: '/api/restore?externalId=STU123456'
+      example: '/api/restore?externalId=devuser02_default@mailinator.com'
     });
   }
 
@@ -69,7 +69,7 @@ app.get('/api/restore', (req, res) => {
 //
 // Usage:
 //   POST /api/restore
-//   Body: { "externalId": "STU123456", "restoreId": "abc-xyz-789", "platform": "siteA" }
+//   Body: { "externalId": "devuser02_default@mailinator.com", "restoreId": "3F05E39E-178B-4B8E-947A-186195801111" }
 // =============================================================================
 app.post('/api/restore', (req, res) => {
   const { externalId, restoreId, platform } = req.body;
@@ -121,7 +121,7 @@ app.get('/api/restore/all', (req, res) => {
     return res.status(400).json({
       success: false,
       error: 'externalId is required.',
-      example: '/api/restore/all?externalId=STU123456'
+      example: '/api/restore/all?externalId=devuser02_default@mailinator.com'
     });
   }
 
@@ -231,17 +231,17 @@ app.get('/', (req, res) => {
     description: 'Stores and retrieves Freshchat restoreId values keyed by externalId (Student ID) and platform.',
     baseUrl: `${req.protocol}://${req.get('host')}`,
     endpoints: {
-      'GET /api/restore?externalId=STU123&platform=siteA': 'Get restoreId for a student + platform',
+      'GET /api/restore?externalId=STU123': 'Get restoreId for a student + platform',
       'POST /api/restore': 'Store/update a restoreId  |  body: { externalId, restoreId, platform }',
-      'GET /api/restore/all?externalId=STU123': 'Get ALL restoreIds for a student (all platforms)',
+      'GET /api/restore/all?externalId=devuser02_default@mailinator.com': 'Get ALL restoreIds for a student (all platforms)',
       'DELETE /api/restore': 'Delete a restoreId  |  body: { externalId, platform }',
       'GET /api/generate?platform=siteA': 'Generate a new externalId + restoreId pair (for testing)',
       'GET /health': 'Health check + record count',
     },
     quickTest: {
       step1_generate: `GET ${req.protocol}://${req.get('host')}/api/generate?platform=siteA`,
-      step2_fetch:    `GET ${req.protocol}://${req.get('host')}/api/restore?externalId=<id>&platform=siteA`,
-      step3_store:    `POST ${req.protocol}://${req.get('host')}/api/restore  body: { "externalId":"STU001","restoreId":"abc-123","platform":"brightspace" }`,
+      step2_fetch:    `GET ${req.protocol}://${req.get('host')}/api/restore?externalId=<id>`,
+      step3_store:    `POST ${req.protocol}://${req.get('host')}/api/restore  body: { "externalId":"devuser02_default@mailinator.com","restoreId":"abc-123","platform":"brightspace" }`,
     }
   });
 });

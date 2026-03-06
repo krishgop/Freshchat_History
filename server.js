@@ -78,7 +78,7 @@ app.post('/api/restore', (req, res) => {
     return res.status(400).json({
       success: false,
       error: 'Both externalId and restoreId are required in the request body.',
-      example: { externalId: 'STU123456', restoreId: 'abc-xyz-789', platform: 'siteA' }
+      example: { externalId: 'devuser02_default@mailinator.com', restoreId: '3F05E39E-178B-4B8E-947A-186195801111' }
     });
   }
 
